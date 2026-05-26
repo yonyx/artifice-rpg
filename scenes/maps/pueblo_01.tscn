@@ -1,113 +1,107 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene format=3 uid="uid://tcbhqcb6u6j8"]
 
-[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="1_player"]
-[ext_resource type="PackedScene" path="res://scenes/npcs/npc.tscn" id="2_npc"]
+[ext_resource type="PackedScene" uid="uid://drorqkkqhwl5p" path="res://scenes/player/player.tscn" id="1_player"]
+[ext_resource type="PackedScene" uid="uid://cvtgcif224law" path="res://scenes/npcs/npc.tscn" id="2_npc"]
 [ext_resource type="PackedScene" path="res://scenes/ui/dialogue_box.tscn" id="3_ui"]
 [ext_resource type="PackedScene" path="res://scenes/objects/house.tscn" id="4_house"]
 [ext_resource type="PackedScene" path="res://scenes/objects/tree.tscn" id="5_tree"]
 [ext_resource type="PackedScene" path="res://scenes/objects/chest.tscn" id="6_chest"]
-[ext_resource type="Script" path="res://scripts/player/camera_follow.gd" id="7_cam"]
-[ext_resource type="Script" path="res://scripts/objects/exit_zone.gd" id="8_exit"]
+[ext_resource type="Script" uid="uid://cbi1qugddjkp8" path="res://scripts/player/camera_follow.gd" id="7_cam"]
+[ext_resource type="Script" uid="uid://bcgcpp5wa07wt" path="res://scripts/objects/exit_zone.gd" id="8_exit"]
 
 [sub_resource type="StandardMaterial3D" id="Mat_ground"]
 albedo_color = Color(0.42, 0.38, 0.28, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ground"]
 material = SubResource("Mat_ground")
-size = Vector3(32.0, 0.2, 32.0)
+size = Vector3(32, 0.2, 32)
 
 [sub_resource type="BoxShape3D" id="BoxShape_ground"]
-size = Vector3(32.0, 0.2, 32.0)
-
-[sub_resource type="Environment" id="Env_1"]
-background_mode = 1
-background_color = Color(0.38, 0.52, 0.72, 1)
-ambient_light_source = 2
-ambient_light_color = Color(0.5, 0.55, 0.7, 1)
-ambient_light_energy = 0.4
-fog_enabled = true
-fog_light_color = Color(0.72, 0.78, 0.88, 1)
-fog_density = 0.025
+size = Vector3(32, 0.2, 32)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape_exit"]
-radius = 2.0
 height = 0.2
+radius = 2.0
 
-[node name="Pueblo_01" type="Node3D"]
+[sub_resource type="Environment" id="Environment_o6xln"]
+ambient_light_source = 2
+ambient_light_color = Color(0.728822, 0.728822, 0.728822, 1)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Env_1")
+[node name="Pueblo_01" type="Node3D" unique_id=1623143440]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=225234877]
 transform = Transform3D(1, 0, 0, 0, 0.707, -0.707, 0, 0.707, 0.707, 4, 12, 6)
 light_color = Color(1, 0.94, 0.8, 1)
-light_energy = 1.4
+light_energy = 1.8
 shadow_enabled = true
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1012162031]
 transform = Transform3D(1, 0, 0, 0, 0.707, -0.707, 0, 0.707, 0.707, 0, 8, 8)
 projection = 1
 size = 12.0
 script = ExtResource("7_cam")
 
-[node name="Ground" type="StaticBody3D" parent="."]
+[node name="Ground" type="StaticBody3D" parent="." unique_id=927916509]
 
-[node name="GroundMesh" type="MeshInstance3D" parent="Ground"]
+[node name="GroundMesh" type="MeshInstance3D" parent="Ground" unique_id=1798905913]
 mesh = SubResource("BoxMesh_ground")
 
-[node name="GroundCollision" type="CollisionShape3D" parent="Ground"]
+[node name="GroundCollision" type="CollisionShape3D" parent="Ground" unique_id=1843488548]
 shape = SubResource("BoxShape_ground")
 
-[node name="Casas" type="Node3D" parent="."]
+[node name="Casas" type="Node3D" parent="." unique_id=483040563]
 
-[node name="Casa_01" parent="Casas" instance=ExtResource("4_house")]
+[node name="Casa_01" parent="Casas" unique_id=1775467419 instance=ExtResource("4_house")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.1, -5)
 
-[node name="Casa_02" parent="Casas" instance=ExtResource("4_house")]
+[node name="Casa_02" parent="Casas" unique_id=1315980473 instance=ExtResource("4_house")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.1, -5)
 
-[node name="Casa_03" parent="Casas" instance=ExtResource("4_house")]
+[node name="Casa_03" parent="Casas" unique_id=301687372 instance=ExtResource("4_house")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -10)
 
-[node name="Arboles" type="Node3D" parent="."]
+[node name="Arboles" type="Node3D" parent="." unique_id=1133780619]
 
-[node name="Arbol_01" parent="Arboles" instance=ExtResource("5_tree")]
+[node name="Arbol_01" parent="Arboles" unique_id=1443242447 instance=ExtResource("5_tree")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.1, -2)
 
-[node name="Arbol_02" parent="Arboles" instance=ExtResource("5_tree")]
+[node name="Arbol_02" parent="Arboles" unique_id=1876180675 instance=ExtResource("5_tree")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.1, -2)
 
-[node name="Arbol_03" parent="Arboles" instance=ExtResource("5_tree")]
+[node name="Arbol_03" parent="Arboles" unique_id=1009157303 instance=ExtResource("5_tree")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0.1, -8)
 
-[node name="Arbol_04" parent="Arboles" instance=ExtResource("5_tree")]
+[node name="Arbol_04" parent="Arboles" unique_id=586517650 instance=ExtResource("5_tree")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0.1, -8)
 
-[node name="Arbol_05" parent="Arboles" instance=ExtResource("5_tree")]
+[node name="Arbol_05" parent="Arboles" unique_id=177809691 instance=ExtResource("5_tree")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.1, 8)
 
-[node name="Arbol_06" parent="Arboles" instance=ExtResource("5_tree")]
+[node name="Arbol_06" parent="Arboles" unique_id=1045327155 instance=ExtResource("5_tree")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.1, 8)
 
-[node name="NPCs" type="Node3D" parent="."]
+[node name="NPCs" type="Node3D" parent="." unique_id=498574144]
 
-[node name="NPC_Aldeano" parent="NPCs" instance=ExtResource("2_npc")]
+[node name="NPC_Aldeano" parent="NPCs" unique_id=1231105711 instance=ExtResource("2_npc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.2, 2)
 
-[node name="NPC_Viejo" parent="NPCs" instance=ExtResource("2_npc")]
+[node name="NPC_Viejo" parent="NPCs" unique_id=1314451233 instance=ExtResource("2_npc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.2, -2)
 
-[node name="Cofre" parent="." instance=ExtResource("6_chest")]
+[node name="Cofre" parent="." unique_id=1991955 instance=ExtResource("6_chest")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.2, 2)
 
-[node name="SalidaBosque" type="Area3D" parent="."]
+[node name="SalidaBosque" type="Area3D" parent="." unique_id=1224047210]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 12)
 script = ExtResource("8_exit")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SalidaBosque"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SalidaBosque" unique_id=1476052216]
 shape = SubResource("CylinderShape_exit")
 
-[node name="Player" parent="." instance=ExtResource("1_player")]
+[node name="Player" parent="." unique_id=15656837 instance=ExtResource("1_player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 
-[node name="DialogueBox" parent="." instance=ExtResource("3_ui")]
+[node name="DialogueBox" parent="." unique_id=1678855689 instance=ExtResource("3_ui")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1165112530]
+environment = SubResource("Environment_o6xln")
