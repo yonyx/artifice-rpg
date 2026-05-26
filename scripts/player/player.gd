@@ -20,6 +20,14 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	if DialogueManager.is_active:
+		velocity.x = 0.0
+		velocity.z = 0.0
+		if not is_on_floor():
+			velocity.y -= GRAVITY * delta
+		move_and_slide()
+		return
+
 	var input_dir := Vector2(
 		Input.get_axis("ui_left", "ui_right") + Input.get_axis("move_left", "move_right"),
 		Input.get_axis("ui_up", "ui_down") + Input.get_axis("move_up", "move_down")
