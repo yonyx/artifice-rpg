@@ -16,6 +16,7 @@ var _last_dir := Vector2.DOWN
 
 
 func _ready() -> void:
+	add_to_group("player")
 	_set_sprite(_last_dir)
 
 

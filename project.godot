@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Artifice rpg"
-run/main_scene="res://scenes/maps/main.tscn"
+run/main_scene="res://scenes/maps/pueblo_01.tscn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 

@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3]
+
+[sub_resource type="StandardMaterial3D" id="Mat_walls"]
+albedo_color = Color(0.85, 0.78, 0.62, 1)
+
+[sub_resource type="StandardMaterial3D" id="Mat_roof"]
+albedo_color = Color(0.55, 0.25, 0.18, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_walls"]
+material = SubResource("Mat_walls")
+size = Vector3(4.0, 2.5, 4.0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_roof"]
+material = SubResource("Mat_roof")
+size = Vector3(4.6, 0.6, 4.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape_walls"]
+size = Vector3(4.0, 2.5, 4.0)
+
+[sub_resource type="BoxShape3D" id="BoxShape_roof"]
+size = Vector3(4.6, 0.6, 4.6)
+
+[node name="House" type="StaticBody3D"]
+
+[node name="WallsMesh" type="MeshInstance3D" parent="."]
+position = Vector3(0, 1.25, 0)
+mesh = SubResource("BoxMesh_walls")
+
+[node name="RoofMesh" type="MeshInstance3D" parent="."]
+position = Vector3(0, 2.8, 0)
+mesh = SubResource("BoxMesh_roof")
+
+[node name="WallsCollision" type="CollisionShape3D" parent="."]
+position = Vector3(0, 1.25, 0)
+shape = SubResource("BoxShape_walls")
+
+[node name="RoofCollision" type="CollisionShape3D" parent="."]
+position = Vector3(0, 2.8, 0)
+shape = SubResource("BoxShape_roof")

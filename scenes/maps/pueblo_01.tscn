@@ -1,0 +1,113 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://scenes/npcs/npc.tscn" id="2_npc"]
+[ext_resource type="PackedScene" path="res://scenes/ui/dialogue_box.tscn" id="3_ui"]
+[ext_resource type="PackedScene" path="res://scenes/objects/house.tscn" id="4_house"]
+[ext_resource type="PackedScene" path="res://scenes/objects/tree.tscn" id="5_tree"]
+[ext_resource type="PackedScene" path="res://scenes/objects/chest.tscn" id="6_chest"]
+[ext_resource type="Script" path="res://scripts/player/camera_follow.gd" id="7_cam"]
+[ext_resource type="Script" path="res://scripts/objects/exit_zone.gd" id="8_exit"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_ground"]
+albedo_color = Color(0.42, 0.38, 0.28, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ground"]
+material = SubResource("Mat_ground")
+size = Vector3(32.0, 0.2, 32.0)
+
+[sub_resource type="BoxShape3D" id="BoxShape_ground"]
+size = Vector3(32.0, 0.2, 32.0)
+
+[sub_resource type="Environment" id="Env_1"]
+background_mode = 1
+background_color = Color(0.38, 0.52, 0.72, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.5, 0.55, 0.7, 1)
+ambient_light_energy = 0.4
+fog_enabled = true
+fog_light_color = Color(0.72, 0.78, 0.88, 1)
+fog_density = 0.025
+
+[sub_resource type="CylinderShape3D" id="CylinderShape_exit"]
+radius = 2.0
+height = 0.2
+
+[node name="Pueblo_01" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Env_1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707, -0.707, 0, 0.707, 0.707, 4, 12, 6)
+light_color = Color(1, 0.94, 0.8, 1)
+light_energy = 1.4
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707, -0.707, 0, 0.707, 0.707, 0, 8, 8)
+projection = 1
+size = 12.0
+script = ExtResource("7_cam")
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="GroundMesh" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("BoxMesh_ground")
+
+[node name="GroundCollision" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape_ground")
+
+[node name="Casas" type="Node3D" parent="."]
+
+[node name="Casa_01" parent="Casas" instance=ExtResource("4_house")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.1, -5)
+
+[node name="Casa_02" parent="Casas" instance=ExtResource("4_house")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.1, -5)
+
+[node name="Casa_03" parent="Casas" instance=ExtResource("4_house")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -10)
+
+[node name="Arboles" type="Node3D" parent="."]
+
+[node name="Arbol_01" parent="Arboles" instance=ExtResource("5_tree")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.1, -2)
+
+[node name="Arbol_02" parent="Arboles" instance=ExtResource("5_tree")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.1, -2)
+
+[node name="Arbol_03" parent="Arboles" instance=ExtResource("5_tree")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0.1, -8)
+
+[node name="Arbol_04" parent="Arboles" instance=ExtResource("5_tree")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0.1, -8)
+
+[node name="Arbol_05" parent="Arboles" instance=ExtResource("5_tree")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.1, 8)
+
+[node name="Arbol_06" parent="Arboles" instance=ExtResource("5_tree")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.1, 8)
+
+[node name="NPCs" type="Node3D" parent="."]
+
+[node name="NPC_Aldeano" parent="NPCs" instance=ExtResource("2_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.2, 2)
+
+[node name="NPC_Viejo" parent="NPCs" instance=ExtResource("2_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.2, -2)
+
+[node name="Cofre" parent="." instance=ExtResource("6_chest")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.2, 2)
+
+[node name="SalidaBosque" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 12)
+script = ExtResource("8_exit")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SalidaBosque"]
+shape = SubResource("CylinderShape_exit")
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+
+[node name="DialogueBox" parent="." instance=ExtResource("3_ui")]
